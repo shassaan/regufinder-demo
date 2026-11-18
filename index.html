@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Regufinder walkthrough</title>
+<meta name="description" content="An illustrative walkthrough of Regufinder on sample data, simulated in the browser.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A7766'/%3E%3Cpath d='M9 22V10h7.5a4 4 0 0 1 0 8H9m7-0.2L22 22' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/app.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("rf-theme");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) { /* storage unavailable: follow the system theme */ }
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#screen">Skip to content</a>
+<div class="banner" role="note">
+  <span class="banner-mark" aria-hidden="true"></span>
+  <span>Illustrative walkthrough on sample data, simulated in your browser. This is not the production product. Acme Mutual is fictional.</span>
+</div>
+
+<div class="shell">
+  <nav class="rail" aria-label="Walkthrough screens">
+    <div class="brand">
+      <span class="brand-name">Regufinder</span>
+      <span class="brand-sub">Sample walkthrough</span>
+    </div>
+    <ol class="steps" id="steps"></ol>
+    <div class="rail-tools">
+      <a href="#/overview" id="restart" class="rail-link">Restart</a>
+      <button type="button" class="rail-link" id="open-glossary">Glossary</button>
+      <button type="button" class="rail-link" id="theme-toggle" aria-label="Switch colour theme">Dark theme</button>
+    </div>
+  </nav>
+
+  <div class="main-col">
+    <div class="pipeline" id="pipeline" aria-label="Pipeline stages"></div>
+    <main id="screen" tabindex="-1"></main>
+    <footer class="page-foot">
+      <a href="#/built">What is built today</a>
+      <span>Every number here is illustrative sample data. Dates are set in March 2027 on purpose.</span>
+    </footer>
+  </div>
+</div>
+
+<div class="guide" id="guide">
+  <button type="button" class="btn btn-quiet" id="guide-back">Back</button>
+  <div class="guide-mid">
+    <span class="guide-count" id="guide-count"></span>
+    <span class="guide-caption" id="guide-caption"></span>
+  </div>
+  <button type="button" class="btn btn-primary" id="guide-next">Next</button>
+</div>
+
+<aside class="glossary" id="glossary" aria-label="Glossary" hidden>
+  <div class="glossary-head">
+    <h2>Glossary</h2>
+    <button type="button" class="btn btn-quiet" id="close-glossary">Close</button>
+  </div>
+  <dl id="glossary-list"></dl>
+</aside>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-head">
+      <h2 id="modal-title"></h2>
+      <button type="button" class="btn btn-quiet" id="modal-close">Close</button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/canon.js"></script>
+<script src="js/ledger-data.js"></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
