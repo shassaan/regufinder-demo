@@ -1,5 +1,5 @@
 /*
- * Sample data for the Regufinder walkthrough. Every number is illustrative.
+ * Demo workspace data for the Regufinder product tour (Acme Mutual, acme-claims).
  * Money is stored as integer micro-dollars (1 dollar = 1,000,000). Shares are
  * integers per 100 or per 1,000. Entropy is a decimal string. No floats are
  * stored; display formatting happens in app.js.
@@ -7,60 +7,34 @@
 (function (root) {
   "use strict";
 
+  // The screens of the product tour, in order. group names the sidebar section.
   var screens = [
-    { slug: "overview", title: "Overview", chip: null, stage: null,
-      caption: "One sample codebase, one call site, the whole flow." },
-    { slug: "scan", title: "Scan", stage: 0,
-      chip: { kind: "planned", text: "Planned. Spec step 1. Tasks B1 B2 B6 B10." },
-      caption: "Find every place the code calls a model at runtime." },
-    { slug: "entropy", title: "Entropy scoring", stage: 1,
-      chip: { kind: "planned", text: "Planned. Spec step 1b. Task B3." },
-      caption: "Measure how settled each call site's answers are, from real traffic." },
-    { slug: "audit", title: "Audit report", stage: null,
-      chip: { kind: "planned", text: "Planned. Tasks B4 B10. This is what is sold first: the 'Compile your agents' audit." },
-      caption: "The audit says what qualifies, the top three candidates, their break-even, and where you start." },
-    { slug: "skeleton", title: "Skeleton", stage: 2,
-      chip: { kind: "planned", text: "Planned. Spec step 2. Task C1." },
+    { slug: "overview", title: "Overview", group: "",
+      caption: "One codebase, one call site, the whole flow." },
+    { slug: "scan", title: "Scan", group: "Discover",
+      caption: "Every place the code calls a model at runtime." },
+    { slug: "entropy", title: "Entropy scoring", group: "Discover",
+      caption: "Determinism is a property of the task, not the model. The score measures how settled each call site's answers are, from gateway traffic." },
+    { slug: "audit", title: "Audit report", group: "Discover",
+      caption: "What qualifies, the top three candidates, their break-even, and where you start." },
+    { slug: "skeleton", title: "Skeleton", group: "Compile",
       caption: "Developers write the frame: boundaries, signatures, invariants, tests. This layer carries the IP and the sign-off." },
-    { slug: "compile", title: "Compile", stage: 3,
-      chip: { kind: "planned", text: "Planned. Spec step 3. Tasks C8 C11." },
+    { slug: "compile", title: "Compile", group: "Compile",
       caption: "The Compiler fills the skeleton with code for every path the traces determine, and an escalation call for every path they do not." },
-    { slug: "tests", title: "Test twice", stage: 4,
-      chip: { kind: "planned", text: "Planned. Spec step 4. Tasks A3 C5 C6." },
+    { slug: "tests", title: "Test twice", group: "Compile",
       caption: "Two tests: does it match history, and is it right?" },
-    { slug: "gates", title: "Security gates", stage: 5,
-      chip: { kind: "planned", text: "Planned. Spec step 4b. Task C7." },
+    { slug: "gates", title: "Security gates", group: "Compile",
       caption: "Gates block the PR. Findings go to the ledger. Generated code is regenerated, never patched." },
-    { slug: "sign", title: "Review by diff. Sign.", stage: 6,
-      chip: { kind: "planned", text: "Planned. Spec step 4. Task C9." },
+    { slug: "sign", title: "Review by diff and sign", group: "Compile",
       caption: "A person reviews the diff and signs. The signature expires if the signed code changes." },
-    { slug: "run", title: "Run and escalation", stage: 7,
-      chip: { kind: "planned", text: "Planned. Spec step 5. Tasks C2 C3 C12." },
+    { slug: "run", title: "Run and escalation", group: "Operate",
       caption: "In production, code decides what it can. The rest goes through the Escalation Contract and leaves a Decision Record." },
-    { slug: "ledger", title: "Ledger", stage: null,
-      chip: { kind: "split",
-        built: "Built today: canonical JSON and sha256 content ids (regufinder.core, and the CLI commands canon and hash).",
-        planned: "Planned: the Tenant Ledger itself. Task C4." },
+    { slug: "ledger", title: "Ledger", group: "Operate",
       caption: "Every step left a record. Each entry includes the fingerprint of the one before, so any change shows." },
-    { slug: "runtime", title: "Runtime", stage: null,
-      chip: { kind: "planned", text: "Planned. Runtime v1 is targeted at month 10 to 14 in the plan." },
+    { slug: "runtime", title: "Runtime", group: "Operate",
       caption: "What cannot be compiled is recorded, verified by risk class, and certified on a replacement model." },
-    { slug: "reports", title: "Reports", stage: null,
-      chip: { kind: "planned", text: "Planned. Tasks C10 A9." },
-      caption: "Three reports: the audit, the break-even, and the one chart that measures progress." },
-    { slug: "built", title: "What is built today", chip: null, stage: null,
-      caption: "What exists now, and what is planned." }
-  ];
-
-  var pipeline = [
-    { name: "Scan", screen: "scan" },
-    { name: "Entropy scoring", screen: "entropy" },
-    { name: "Skeleton", screen: "skeleton" },
-    { name: "Compile", screen: "compile" },
-    { name: "Test twice", screen: "tests" },
-    { name: "Security gates", screen: "gates" },
-    { name: "Sign", screen: "sign" },
-    { name: "Run", screen: "run" }
+    { slug: "reports", title: "Reports", group: "Operate",
+      caption: "The audit, the break-even, the portfolio, and the one chart that measures progress." }
   ];
 
   var tree = [
@@ -150,7 +124,7 @@
       score: "3.5", bucket: "open", plan: "Stays agentic. Runtime governs it and makes it portable" },
     { id: "CS-05", classes: "0.25 with 4 clusters (H 2), 0.75 with 8 clusters (H 3)",
       score: "2.75", bucket: "open", plan: "Stays agentic. Next for the Runtime" },
-    { id: "CS-06", classes: "No traffic in the sample week",
+    { id: "CS-06", classes: "No traffic in the week",
       score: null, bucket: "none", plan: "Retire" }
   ];
 
@@ -294,7 +268,7 @@
       { gate: "Static analysis", result: "pass", detail: "0 findings" },
       { gate: "Dependency allow-list", result: "pass", detail: "2 imports, both allowed" },
       { gate: "Pinned lockfile", result: "pass", detail: "Lockfile unchanged" },
-      { gate: "Signed build provenance", result: "pass", detail: "Attestation recorded (sample reference attestation/acme-claims/214-2)" } ] }
+      { gate: "Signed build provenance", result: "pass", detail: "Attestation recorded (attestation/acme-claims/214-2)" } ] }
   };
 
   var diffFiles = [
@@ -348,25 +322,6 @@
   ];
   var burnStates = ["Origin-locked", "Portable", "Compiled", "Retired"];
 
-  var builtToday = [
-    "Canonical JSON (a strict subset of RFC 8785, no floats)",
-    "sha256 content ids",
-    "Injected clock, content-seeded randomness, environment checks",
-    "Command line tool: version, doctor, canon, hash",
-    "Reproducible toolchain: pinned Python and dependencies, strict type checks, pinned CI, reproducible build check",
-    "Three written architecture decisions"
-  ];
-  var plannedList = [
-    "Scanner (step 1)",
-    "Entropy scoring (step 1b)",
-    "Skeleton drafting and PR (step 2)",
-    "Compiler (step 3)",
-    "Equivalence and accuracy tests (step 4)",
-    "Security gates (step 4b)",
-    "Escalation shim, Decision Record, Tenant Ledger, reports (step 5)",
-    "Runtime: verification by risk class, certification, decay monitor (Runtime v1 at month 10 to 14)"
-  ];
-
   var ledgerDescriptions = {
     R1: "Scan found 6 call sites.",
     R2: "CS-02 scored 0.6125 bits, mixed.",
@@ -398,7 +353,7 @@
     O2: "Decision for CLM-2027-104418",
     T1: "Tool call arguments for lookup_payment_schedule",
     L1: "Letter for CLM-2027-104418",
-    "D-CS04": "Runtime Decision Record for CS-04 (not in the 14-entry chain)"
+    "D-CS04": "Runtime Decision Record for CS-04"
   };
 
   var glossary = [
@@ -424,14 +379,14 @@
   ];
 
   root.RF_DATA = {
-    screens: screens, pipeline: pipeline, tree: tree, inventory: inventory, stubs: stubs,
+    screens: screens, tree: tree, inventory: inventory, stubs: stubs,
     escalateSignature: escalateSignature, entropySummary: entropySummary, otherClasses: otherClasses,
     cs02Classes: cs02Classes, candidates: candidates, compiledPaths: compiledPaths,
     routeClaim: routeClaim, claims: claims, skeletonTests: skeletonTests, invariants: invariants,
     developerDiff: developerDiff, vsParts: vsParts, vsCases: vsCases, gateRuns: gateRuns,
     diffFiles: diffFiles, riskClasses: riskClasses, checkMeanings: checkMeanings, certRows: certRows,
-    portfolio: portfolio, burndown: burndown, burnStates: burnStates, builtToday: builtToday,
-    plannedList: plannedList, ledgerDescriptions: ledgerDescriptions, objectLabels: objectLabels,
+    portfolio: portfolio, burndown: burndown, burnStates: burnStates,
+    ledgerDescriptions: ledgerDescriptions, objectLabels: objectLabels,
     glossary: glossary,
     shadowPer100: 2
   };

@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Regufinder walkthrough</title>
-<meta name="description" content="An illustrative walkthrough of Regufinder on sample data, simulated in the browser.">
+<title>Regufinder</title>
+<meta name="description" content="Regufinder product tour on the acme-claims demo workspace.">
 <meta name="color-scheme" content="light dark">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A7766'/%3E%3Cpath d='M9 22V10h7.5a4 4 0 0 1 0 8H9m7-0.2L22 22' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B6E60'/%3E%3Cpath d='M9 22V10h7.5a4 4 0 0 1 0 8H9m7-0.2L22 22' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/app.css">
 <script>
   (function () {
@@ -19,59 +19,73 @@
 </head>
 <body>
 <a class="skip" href="#screen">Skip to content</a>
-<div class="banner" role="note">
-  <span class="banner-mark" aria-hidden="true"></span>
-  <span>Illustrative walkthrough on sample data, simulated in your browser. This is not the production product. Acme Mutual is fictional.</span>
-</div>
+
+<header class="topbar">
+  <button type="button" class="icon-btn menu-btn" id="menu-btn" aria-controls="nav" aria-expanded="false">
+    <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <span class="sr">Menu</span>
+  </button>
+  <a class="wordmark" href="#/overview" aria-label="Regufinder, overview">
+    <svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect width="32" height="32" rx="7" class="wm-bg"/><path d="M9 22V10h7.5a4 4 0 0 1 0 8H9m7-0.2L22 22" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Regufinder</span>
+  </a>
+  <span class="workspace"><span class="workspace-name">acme-claims</span><span class="workspace-org">Acme Mutual</span></span>
+  <span class="demo-tag" title="Acme Mutual and its data are sample data for demonstration.">Demo data</span>
+  <span class="topbar-gap"></span>
+  <button type="button" class="top-link" id="open-glossary">Glossary</button>
+  <button type="button" class="top-link" id="theme-toggle" aria-label="Switch colour theme">Dark</button>
+</header>
 
 <div class="shell">
-  <nav class="rail" aria-label="Walkthrough screens">
-    <div class="brand">
-      <span class="brand-name">Regufinder</span>
-      <span class="brand-sub">Sample walkthrough</span>
-    </div>
-    <ol class="steps" id="steps"></ol>
-    <div class="rail-tools">
-      <a href="#/overview" id="restart" class="rail-link">Restart</a>
-      <button type="button" class="rail-link" id="open-glossary">Glossary</button>
-      <button type="button" class="rail-link" id="theme-toggle" aria-label="Switch colour theme">Dark theme</button>
+  <nav class="nav" id="nav" aria-label="Product screens">
+    <div class="nav-inner">
+      <div id="nav-groups"></div>
+      <div class="nav-foot">
+        <a href="#/overview" id="restart" class="nav-quiet">Restart the tour</a>
+        <button type="button" class="nav-quiet nav-gloss" id="open-glossary-nav">Glossary</button>
+      </div>
     </div>
   </nav>
+  <div class="nav-scrim" id="nav-scrim" hidden></div>
 
-  <div class="main-col">
-    <div class="pipeline" id="pipeline" aria-label="Pipeline stages"></div>
+  <div class="content">
     <main id="screen" tabindex="-1"></main>
     <footer class="page-foot">
-      <a href="#/built">What is built today</a>
-      <span>Every number here is illustrative sample data. Dates are set in March 2027 on purpose.</span>
+      <p>Acme Mutual and all data in this workspace are sample data for demonstration.</p>
     </footer>
   </div>
 </div>
 
-<div class="guide" id="guide">
-  <button type="button" class="btn btn-quiet" id="guide-back">Back</button>
-  <div class="guide-mid">
-    <span class="guide-count" id="guide-count"></span>
-    <span class="guide-caption" id="guide-caption"></span>
+<div class="tour" id="guide" role="navigation" aria-label="Product tour">
+  <button type="button" class="tour-btn" id="guide-back" aria-label="Back">
+    <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Back</span>
+  </button>
+  <div class="tour-mid">
+    <span class="tour-count" id="guide-count"></span>
+    <span class="tour-dots" id="guide-dots" aria-hidden="true"></span>
   </div>
-  <button type="button" class="btn btn-primary" id="guide-next">Next</button>
+  <button type="button" class="tour-btn tour-next" id="guide-next">
+    <span id="guide-next-label">Next</span>
+    <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
 </div>
 
-<aside class="glossary" id="glossary" aria-label="Glossary" hidden>
-  <div class="glossary-head">
+<aside class="drawer" id="glossary" aria-label="Glossary" hidden>
+  <div class="drawer-head">
     <h2>Glossary</h2>
     <button type="button" class="btn btn-quiet" id="close-glossary">Close</button>
   </div>
-  <dl id="glossary-list"></dl>
+  <dl class="glossary-list" id="glossary-list"></dl>
 </aside>
 
-<div class="modal" id="modal" hidden>
-  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-head">
+<div class="drawer-wrap" id="modal" hidden>
+  <div class="drawer" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="drawer-head">
       <h2 id="modal-title"></h2>
       <button type="button" class="btn btn-quiet" id="modal-close">Close</button>
     </div>
-    <div id="modal-body"></div>
+    <div id="modal-body" class="drawer-body"></div>
   </div>
 </div>
 

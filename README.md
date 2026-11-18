@@ -1,5 +1,5 @@
 # Regufinder demo
 
-An illustrative walkthrough of the Regufinder flow on sample data, simulated in the browser.
+A product demo of Regufinder on a sample workspace. The organisation and all data are sample data for demonstration.
 
 https://shassaan.github.io/regufinder-demo/

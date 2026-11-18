@@ -544,7 +544,6 @@ window.RF_LEDGER = {
    "ref": "R14",
    "value": {
     "type": "certificate",
-    "status": "sketch, format not yet defined in the spec",
     "call_site": "CS-04",
     "policy_hash": "sha256:a8bd8eb13a12fb1ca521df59de6ef404eb5e2dd84f9284caf727edebd22306ad",
     "origin_model": {
@@ -561,7 +560,7 @@ window.RF_LEDGER = {
     "new_failures_high_class": 0,
     "result": "certified"
    },
-   "id": "sha256:f3f1966523818eb0a3d2417808bf2232452ac25c099bdf5487fb6937af4d558d"
+   "id": "sha256:1509b9d986765bcebc25191a56bf8b085a03579e64bcb1ef7f03318316d1c5d3"
   },
   {
    "ref": "D-CS04",
@@ -778,13 +777,13 @@ window.RF_LEDGER = {
     "seq": 14,
     "prev": "sha256:d59dc39ccfec1684424824c4e3b3c4a745dde7028ae3ef772a5c6d6c734ae66c",
     "kind": "certificate",
-    "record": "sha256:f3f1966523818eb0a3d2417808bf2232452ac25c099bdf5487fb6937af4d558d",
+    "record": "sha256:1509b9d986765bcebc25191a56bf8b085a03579e64bcb1ef7f03318316d1c5d3",
     "at": "2027-03-22T13:45:00.000000Z"
    },
-   "id": "sha256:47010d4c4e4faf01b6941ec08b73c522f67b216da3c7320cf2fe3c6bde48f946",
+   "id": "sha256:4b663e827cb0b8a779d401b93f5b4ac88a0babc518e4c54de4bbe21bac04a023",
    "bytes": 230
   }
  ],
- "root": "sha256:47010d4c4e4faf01b6941ec08b73c522f67b216da3c7320cf2fe3c6bde48f946",
+ "root": "sha256:4b663e827cb0b8a779d401b93f5b4ac88a0babc518e4c54de4bbe21bac04a023",
  "anchor": "anchor/2027-03-22/0001"
 };
